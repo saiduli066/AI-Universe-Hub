@@ -23,6 +23,15 @@
 
   <!-- main -->
   <main>
+
+       <!-- spinner section-->
+    <div class="d-flex justify-content-center">
+        <div id="spinner" class="spinner-border text-danger mt-5 d-none" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+       <!-- spinner section end -->
+
       <!-- cards section-->
       <section id="card-body" class="container container-fluid mt-5">
         
@@ -31,7 +40,7 @@
       </section>
       <!-- show more button -->
       <section class="text-center m-4">
-        <button id="show-more" class="btn btn-danger ">Show more</button>
+        <button id="show-more" onclick="showMore()" class="btn btn-danger d-none">Show more</button>
       </section>
   <!-- card section end -->
 

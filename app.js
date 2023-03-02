@@ -1,10 +1,17 @@
 // initial data fetching
 const fetchAi = () => {
     const url = `https://openapi.programming-hero.com/api/ai/tools/`;
-
+    document.getElementById('spinner').classList.remove('d-none');//spinner
+    /* this additional code because of the show more btn coming up until the cards  loaded */
+    document.getElementById('show-more').classList.add('d-none');  //for show more btn
     fetch(url)
         .then(res => res.json())
-        .then(data => showCards(data.data))
+        .then(data => {
+            document.getElementById('spinner').classList.add('d-none');//spinner
+         //show more btn
+            document.getElementById('show-more').classList.remove('d-none');
+            showCards(data.data);
+        })
         .catch(err => console.log(err))
 };
 
@@ -19,6 +26,7 @@ const showCards = (aiTools) => {
 
 
     const cardContainer = document.getElementById('card-body');
+    cardContainer.innerHTML = '';
     const rowDiv = document.createElement('div');
     rowDiv.classList.add('row');
     tools.forEach(tool => {
@@ -46,3 +54,11 @@ const showCards = (aiTools) => {
 
 };
 
+// show all cards
+
+// const showMore = () => {
+//     fetch(`https://openapi.programming-hero.com/api/ai/tools/`)
+//         .then(res => res.json())
+//         .then(data => showCards(data.data))
+//     showCards(data);
+// };
