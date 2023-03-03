@@ -34,7 +34,7 @@ const showCards = (aiTools) => {
     rowDiv.classList.add('row');
 
     tools.forEach(tool => {
-        const { name, image, published_in, features } = tool;
+        const { name, image, published_in, features, id } = tool;
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('col-sm-12', 'col-md-6', 'col-lg-4', 'mb-4');
       
@@ -59,9 +59,9 @@ const showCards = (aiTools) => {
                 </div>
                 <div>
                 
-                <span id="modal-pointer" class="rounded-circle text-danger p-2" style="background-color: #dc35461a; ">
+             <button id="modal-pointer" onclick="loadSingleData('${id}')" class="rounded-circle text-danger border   border-0 p-2" style="background-color: #dc35461a;" data-bs-toggle="modal" data-bs-target="#exampleModal" >
                 <i class="fas fa-arrow-right"></i>
-                </span>
+            </button>
                 </div>
                 </div>
             </div>
@@ -72,9 +72,21 @@ const showCards = (aiTools) => {
     cardContainer.appendChild(rowDiv);
 
     
-
-
 };
+
+const loadSingleData = (id) => {
+  
+    const url = ` https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    fetch(url)
+        .then(res => res.json())
+        .then(data => console.log(data))
+    
+    
+}
+
+const showSingleData = () => {
+    
+}
 
 // const showMoreButton = document.getElementById('show-more');
 // showMoreButton.addEventListener('click', () => {
