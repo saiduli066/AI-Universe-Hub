@@ -130,13 +130,15 @@ const showSingleData = (details) => {
     }
 
     // modal inner image and a accuracy badge in it.
+    //showing the batch with accuracy ,if there's no accuracy nothing will be shown.
 
     document.getElementById('img-container').innerHTML = `
         
         <div class="card">
         <img class="w-100 " style="" src='${image_link[0]}' alt="">
         <div class="card-img-overlay">
-        <sup><span class="badge bg-danger float-end">${accuracy.score ? accuracy.score * 100 : ' '}</span></sup>
+      <sup>${ accuracy.score ? '<span class="badge bg-danger float-end">' + accuracy.score * 100 + '% accuracy</span>' : '' }</sup>
+
         </div>
         </div>
     `;
