@@ -4,16 +4,11 @@ const fetchAi = () => {
     const url = `https://openapi.programming-hero.com/api/ai/tools/`;
     document.getElementById('spinner').classList.remove('d-none');//spinner
     
-    /* this additional code because of the show more btn coming up until the cards  loaded */
-    document.getElementById('show-more').classList.add('d-none');  //for show more btn
     fetch(url)
         .then(res => res.json())
         .then(data => {
             document.getElementById('spinner').classList.add('d-none');//spinner
             showCards(data.data);
-            //show more btn
-            document.getElementById('show-more').classList.remove('d-none');
-           
         })
         .catch(err => console.log(err))
 };
@@ -35,25 +30,18 @@ const showCards = (aiTools) => {
 
     tools.forEach(tool => {
         const { name, image, published_in, features, id } = tool;
-
+        
+        // console.log(id);
         const cardDiv = document.createElement('div');
         
         cardDiv.classList.add('col-sm-12', 'col-md-6', 'col-lg-4', 'mb-4', 'card');
 
-         //when the card's id is greater than 6, d-none class will be added to cardDive
+         //when the card's id is greater than 6, 'd-none' class will be added to cardDiv
         if (id > 6) {
-            cardDiv.classList.add('d-none');
-            document.getElementById('show-more').classList.add('d-none');
+            cardDiv.classList.add('d-none'); 
         }
 
-        // if (id >= 6) {
-            
-        // } else {
-        //     document.getElementById('show-more').classList.remove('d-none');
-        // }
-
-       
-
+        
         cardDiv.innerHTML = `
         <div class="card">
             <img src="${image}" class="card-img-top img-fluid" style="width: 450px; height: 250px;" alt="">
@@ -83,10 +71,12 @@ const showCards = (aiTools) => {
     });
     cardContainer.appendChild(rowDiv);
 
-   
-
+    toggleShowMoreButton(true);
     
 };
+
+
+
 
 const loadSingleData = (id) => {
   
@@ -110,8 +100,11 @@ const showSingleData = (details) => {
 // set the price and plan 
     document.getElementById('month-basic-price').innerText = `${pricing[0].price ? pricing[0].price : 'free of cost'}`;
     document.getElementById('month-basic-plan').innerText = `${pricing[0].plan}`;
+
     document.getElementById('month-pro-price').innerText = `${pricing[1].price ? pricing[1].price : 'free of cost'}`;
     document.getElementById('month-pro-plan').innerText = `${pricing[1].plan}`;
+
+
     document.getElementById('enterprise-contact').innerText = `${pricing[2].price ? pricing[2].price : 'free of coast'}`;
     document.getElementById('enterprise-section').innerText = `${pricing[2].plan}`;
     
@@ -157,14 +150,16 @@ const sortButton = document.getElementById('sort-button');
 const cardContainer = document.getElementById('card-body');
 
 // Add event listener to button
-sortButton.addEventListener('click', function () {
+const sortByDate =() => {
 
     // Get all cards and convert them to an array
     const cards = Array.from(cardContainer.querySelectorAll('.card'));
+    console.log(cards);
 
     // Sort the cards by their data-date attribute using a compare function
     cards.sort(function (card1, card2) {
         const date1 = new Date(card1.dataset.date);
+        console.log(date1);
         const date2 = new Date(card2.dataset.date);
         return date1 - date2;
     });
@@ -176,9 +171,10 @@ sortButton.addEventListener('click', function () {
     cards.forEach(function (card) {
         cardContainer.appendChild(card);
     });
-});
+};
 
 
+// show more...
 const showMoreButton = document.getElementById('show-more');
 showMoreButton.addEventListener('click', () => {
     const cards = document.querySelectorAll('.card');
@@ -186,35 +182,16 @@ showMoreButton.addEventListener('click', () => {
     cards.forEach((card) => {
         card.classList.remove('d-none');
     });
+    toggleShowMoreButton(false);
 });
 
-//
-// const loadMore = () => {
-    
-// }
-
-// // 
-// document.getElementById('show-more').addEventListener('click', function () {
-    
-// })
-
-// // Show only the first six cards by default
-// const cardsToShow = 6;
-// const cardContainer = document.getElementById('card-body');
-// const cards = document.querySelectorAll('.card');
-// console.log(cards);
-// cards.forEach((card, index) => {
-//     if (index >= cardsToShow) {
-//         card.classList.add('d-none');
-//     }
-// });
-
-// // show all the cards..
-// const showMoreButton = document.getElementById('show-more');
-// showMoreButton.addEventListener('click', () => {
-//     cards.forEach((card) => {
-//         card.classList.remove('d-none');
-//     });
-// });
-
+const toggleShowMoreButton = isShowing => {
+    const showMoreButton = document.getElementById('show-more');
+    if (isShowing) {
+        showMoreButton.classList.remove('d-none');
+    }
+    else {
+        showMoreButton.classList.add('d-none');
+    }
+}
 
