@@ -41,7 +41,7 @@ const showCards = (aiTools) => {
             cardDiv.classList.add('d-none'); 
         }
 
-        
+
         cardDiv.innerHTML = `
         <div class="card">
             <img src="${image}" class="card-img-top img-fluid" style="width: 450px; height: 250px;" alt="">
@@ -71,6 +71,7 @@ const showCards = (aiTools) => {
     });
     cardContainer.appendChild(rowDiv);
 
+    // calling function to remove 'd-none' class of show-more button. 
     toggleShowMoreButton(true);
     
 };
@@ -144,47 +145,52 @@ const showSingleData = (details) => {
     
 }
 
+//
 
-// Get the button and card container
-const sortButton = document.getElementById('sort-button');
-const cardContainer = document.getElementById('card-body');
+// // Get the button and card container
+// const sortButton = document.getElementById('sort-button');
+// const cardContainer = document.getElementById('card-body');
 
 // Add event listener to button
-const sortByDate =() => {
+// const sortByDate =(data) => {
+//     console.log(data);
+//     // // Get all cards and convert them to an array
+//     // const cards = Array.from(cardContainer.querySelectorAll('.card'));
+//     // console.log(cards);
+//     const dates = data;
+    
 
-    // Get all cards and convert them to an array
-    const cards = Array.from(cardContainer.querySelectorAll('.card'));
-    console.log(cards);
+    // // Sort the cards by their data-date attribute using a compare function
+    // cards.sort(function (card1, card2) {
+    //     const date1 = new Date(card1.dataset.date);
+    //     console.log(date1);
+    //     const date2 = new Date(card2.dataset.date);
+    //     return date1 - date2;
+    // });
 
-    // Sort the cards by their data-date attribute using a compare function
-    cards.sort(function (card1, card2) {
-        const date1 = new Date(card1.dataset.date);
-        console.log(date1);
-        const date2 = new Date(card2.dataset.date);
-        return date1 - date2;
-    });
+    // // Remove all cards from the container
+    // cardContainer.innerHTML = '';
 
-    // Remove all cards from the container
-    cardContainer.innerHTML = '';
-
-    // Adding the sorted cards back to the container
-    cards.forEach(function (card) {
-        cardContainer.appendChild(card);
-    });
-};
+    // // Adding the sorted cards back to the container
+    // cards.forEach(function (card) {
+    //     cardContainer.appendChild(card);
+    // });
+// };
 
 
 // show more...
 const showMoreButton = document.getElementById('show-more');
 showMoreButton.addEventListener('click', () => {
     const cards = document.querySelectorAll('.card');
-    console.log(cards);
+    // console.log(cards);
     cards.forEach((card) => {
         card.classList.remove('d-none');
     });
+    // to hide the show more button.
     toggleShowMoreButton(false);
 });
 
+//to add or remove d-none class of show more button
 const toggleShowMoreButton = isShowing => {
     const showMoreButton = document.getElementById('show-more');
     if (isShowing) {
