@@ -86,16 +86,16 @@ const loadSingleData = (id) => {
 const showSingleData = (details) => {
     const Title = document.getElementById('title');
     //
-    const { description, pricing, features, integrations, image_link } = details;
+    const { description, pricing, features, integrations, image_link, input_output_examples, accuracy } = details;
 
-    console.log(image_link);
+    console.log(accuracy);
     
     Title.innerText = `${description}`;
 
-    document.getElementById('month-basic-price').innerText = `${pricing[0] ? pricing[0].price:'free'}`;
-    document.getElementById('month-basic-plan').innerText = `${pricing[0] ? pricing[0].plan : 'free'}`;
-    document.getElementById('month-pro-price').innerText = `${pricing[1] ? pricing[1].price : 'free'}`;
-    document.getElementById('month-pro-plan').innerText = `${pricing[1] ? pricing[1].plan : "free"}`;
+    document.getElementById('month-basic-price').innerText = `${pricing[0] && pricing[0].price ? pricing[0].price : 'free of cost'}`;
+    document.getElementById('month-basic-plan').innerText = `${pricing[0].plan}`;
+    document.getElementById('month-pro-price').innerText = `${pricing[1] ? pricing[1].price : 'free of cost'}`;
+    document.getElementById('month-pro-plan').innerText = `${pricing[1].plan}`;
     document.getElementById('enterprise-contact').innerText = `${pricing[2].price}`;
     document.getElementById('enterprise-section').innerText = `${pricing[2].plan}`;
     
@@ -114,10 +114,19 @@ const showSingleData = (details) => {
     }
 
     document.getElementById('img-container').innerHTML = `
-        <img class="w-100" style="" src='${image_link[0]}' alt="">
+        
+        <div class="card">
+        <img class="w-100 " style="" src='${image_link[0]}' alt="">
+        <div class="card-img-overlay">
+        <sup><span class="badge bg-danger float-end">${accuracy.score * 100}% accuracy</span></sup>
+        </div>
+        </div>
     `;
 
+//   qna by ai
+    document.getElementById('asked-question').innerText = `${input_output_examples[0].input}`;
 
+    document.getElementById('ai-reply').innerText = `${input_output_examples[0].output}`;
 
     
 }
