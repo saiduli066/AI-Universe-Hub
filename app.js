@@ -35,20 +35,33 @@ const showCards = (aiTools) => {
 
     tools.forEach(tool => {
         const { name, image, published_in, features, id } = tool;
+
         const cardDiv = document.createElement('div');
-        cardDiv.classList.add('col-sm-12', 'col-md-6', 'col-lg-4', 'mb-4');
-      
+        
+        cardDiv.classList.add('col-sm-12', 'col-md-6', 'col-lg-4', 'mb-4', 'card');
+
+         //when the card's id is greater than 6, d-none class will be added to cardDive
+        if (id > 6) {
+            cardDiv.classList.add('d-none');
+            document.getElementById('show-more').classList.add('d-none');
+        }
+
+        // if (id >= 6) {
+            
+        // } else {
+        //     document.getElementById('show-more').classList.remove('d-none');
+        // }
+
        
 
-        
         cardDiv.innerHTML = `
         <div class="card">
-            <img src="${image}" class="card-img-top img-fluid" style="width: 450px; height: 250px;" alt="...">
+            <img src="${image}" class="card-img-top img-fluid" style="width: 450px; height: 250px;" alt="">
             <div class="card-body">
                 <h5 class="card-title">Features</h5>
-                 <p id="feature-text" class="card-text m-0 p-0">1.${features ? features[0] : "unavailable"}</p>
-                    <p class="card-text m-0 p-0">2.${features ? features[1] : "unavailable"}</p>
-                    <p class="card-text m-0 p-0">3.${features ? features[2] : "not available"}</p>
+                 <p id="feature-text" class="card-text m-0 p-0">1.${features[0]? features[0] : "unavailable"}</p>
+                    <p class="card-text m-0 p-0">2.${features[1] ? features[1] : "unavailable"}</p>
+                    <p class="card-text m-0 p-0">3.${features[2] ? features[2]: "not available"}</p>
                   
                  <div class="d-flex justify-content-between align-items-end">   
                 <div >
@@ -70,6 +83,8 @@ const showCards = (aiTools) => {
     });
     cardContainer.appendChild(rowDiv);
 
+   
+
     
 };
 
@@ -88,15 +103,16 @@ const showSingleData = (details) => {
     //
     const { description, pricing, features, integrations, image_link, input_output_examples, accuracy } = details;
 
-    console.log(accuracy);
+    // console.log(accuracy);
     
     Title.innerText = `${description}`;
 
-    document.getElementById('month-basic-price').innerText = `${pricing[0] && pricing[0].price ? pricing[0].price : 'free of cost'}`;
+// set the price and plan 
+    document.getElementById('month-basic-price').innerText = `${pricing[0].price ? pricing[0].price : 'free of cost'}`;
     document.getElementById('month-basic-plan').innerText = `${pricing[0].plan}`;
-    document.getElementById('month-pro-price').innerText = `${pricing[1] ? pricing[1].price : 'free of cost'}`;
+    document.getElementById('month-pro-price').innerText = `${pricing[1].price ? pricing[1].price : 'free of cost'}`;
     document.getElementById('month-pro-plan').innerText = `${pricing[1].plan}`;
-    document.getElementById('enterprise-contact').innerText = `${pricing[2].price}`;
+    document.getElementById('enterprise-contact').innerText = `${pricing[2].price ? pricing[2].price : 'free of coast'}`;
     document.getElementById('enterprise-section').innerText = `${pricing[2].plan}`;
     
     
@@ -113,12 +129,14 @@ const showSingleData = (details) => {
        
     }
 
+    // modal inner image and a accuracy badge in it.
+
     document.getElementById('img-container').innerHTML = `
         
         <div class="card">
         <img class="w-100 " style="" src='${image_link[0]}' alt="">
         <div class="card-img-overlay">
-        <sup><span class="badge bg-danger float-end">${accuracy.score * 100}% accuracy</span></sup>
+        <sup><span class="badge bg-danger float-end">${accuracy.score ? accuracy.score * 100 : ' '}</span></sup>
         </div>
         </div>
     `;
@@ -131,14 +149,42 @@ const showSingleData = (details) => {
     
 }
 
-// const showMoreButton = document.getElementById('show-more');
-// showMoreButton.addEventListener('click', () => {
-//     const cards = document.querySelectorAll('.card');
-//     console.log(cards);
-//     cards.forEach((card) => {
-//         card.classList.remove('d-none');
-//     });
-// });
+
+// Get the button and card container
+const sortButton = document.getElementById('sort-button');
+const cardContainer = document.getElementById('card-body');
+
+// Add event listener to button
+sortButton.addEventListener('click', function () {
+
+    // Get all cards and convert them to an array
+    const cards = Array.from(cardContainer.querySelectorAll('.card'));
+
+    // Sort the cards by their data-date attribute using a compare function
+    cards.sort(function (card1, card2) {
+        const date1 = new Date(card1.dataset.date);
+        const date2 = new Date(card2.dataset.date);
+        return date1 - date2;
+    });
+
+    // Remove all cards from the container
+    cardContainer.innerHTML = '';
+
+    // Adding the sorted cards back to the container
+    cards.forEach(function (card) {
+        cardContainer.appendChild(card);
+    });
+});
+
+
+const showMoreButton = document.getElementById('show-more');
+showMoreButton.addEventListener('click', () => {
+    const cards = document.querySelectorAll('.card');
+    console.log(cards);
+    cards.forEach((card) => {
+        card.classList.remove('d-none');
+    });
+});
 
 //
 // const loadMore = () => {
