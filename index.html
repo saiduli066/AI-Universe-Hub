@@ -24,7 +24,7 @@
     <!-- header section -->
     <header class="text-center mt-5">
          <h1 class="mb-3 fw-bold">AI Universe Hub</h1>
-         <button class="btn btn-danger fs-4">sort by data</button>
+         <button class="btn btn-danger fs-4">sort by date</button>
     </header>
   <!-- header section end -->
   
@@ -51,14 +51,56 @@
     
 
     <!-- Modal -->
-    <div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl ">
             <div class="modal-content">
                 <div class="modal-header border-0">
                     <button type="button" class="btn-close text-danger" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    
+                <div id="modal-body" class="modal-body  container-fluid mb-md-4 mb-lg-4 mb-xl-4 mb-2 mx-1 w-100">
+                    <!-- customized modal body -->
+                    <div class="d-flex w-100 flex-column flex-lg-row flex-xl-row parent  gap-3 ">
+
+                        <div class=" container-fluid features-integrations" id="">
+                            <h6 id="title" class="fw-bold"></h6>  
+                            
+                            <div class="d-flex w-100 justify-content-evenly flex-column flex-lg-row flex-xl-row text-center gap-1">
+                                  <div class="bg-white p-2 text-success">
+                                    <h6 id="month-basic-price"></h6>
+                                    <h6 id="month-basic-plan"></h6>
+                                  </div>
+                                  <div class="bg-white p-2 text-warning">
+                                    <h6 id="month-pro-price"></h6>
+                                    <h6 id="month-pro-plan"></h6>
+                                  </div>
+                                  <div class="bg-white p-2 text-danger">
+                                    <h6 id="enterprise-contact" class="m-0 p-0"></h6>
+                                    <h6 id="enterprise-section" class="m-0 p-0"></h6>
+                                  </div>
+                            </div>
+                        <div class=" d-flex justify-content-evenly">
+                              <div class="p-2"><strong>Features</strong>
+                                <p id="feature-1" class="fw-normal m-0 p-0"></p>
+                                <p id="feature-2" class="fw-normal m-0 p-0"></p>
+                                <p id="feature-3" class="fw-normal m-0 p-0"></p>
+                            </div>
+                            <div>
+                                <div class="fw-bold m-2">Integrations</div>
+                            <p id="integration-1" class="fw-normal m-0 p-0"></p>
+                            <p id="integration-2" class="fw-normal m-0 p-0"></p>
+                            <p id="integration-3" class="fw-normal m-0 p-0"></p>
+
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="img-qna d-flex flex-column">
+                           <div id="img-container" class="img-container"></div>
+                            <h4 id="q-1"></h4>
+                            <p id="q-2"></p>
+
+                        </div>
+                        </div>
                 </div>
                 
             </div>

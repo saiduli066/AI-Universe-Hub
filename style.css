@@ -1,8 +1,39 @@
 .btn-close{
-    margin-top: -4em !important;
+    margin-top: -2.5em !important;
     margin-right: -2em !important;
     background-color: #e2304298;
     border-radius: 50%;
     /* color: #DC3545 !important ; */
     color: white !important;
+}
+.parent{
+    width: 100%;
+    margin: auto;
+}
+.features-integrations{
+ background-color:#ff6d6d0e;
+ width:60%;
+ /* overflow: hidden; */
+ /* padding: 5px; */
+ margin: auto; 
+}
+
+.img-qna{
+width: 30%;
+ margin: auto;
+}
+
+.img-container{
+    width: 100%;
+}
+
+@media screen and (max-width:667px) {
+   
+    .img-qna{
+width: 100%;
+}
+.features-integrations{
+ background-color:#ff6d6d0e;
+ width: 100%;
+}
 }
